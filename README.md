@@ -2,14 +2,15 @@
 Tareas del Ramo Estructura de Datos realizado en el semestre 2022-1
 
 ## Tarea 0
-- Haz click aqui para ver la descripcion de la [Tarea 0]
+- Haz click aquí para ver la descripción de la [Tarea 0](./T0-2022-2-juanjouriarte/README.md)
 
 ## Tarea 1
-- TODO: Agregar descripción de la tarea 1
+- Haz click aquí para ver la descripción de la [Tarea 1](./T1-2022-2-juanjouriarte/README.md)
 
 ## Tarea 2
-- TODO: Agregar descripción de la tarea 2
+- Haz click aquí para ver la descripción de la [Tarea 2](./T2-2022-2-juanjouriarte/README.md)
 
 ## Tarea 3
-- TODO: Agregar descripción de la tarea 3
+- Haz click aquí para ver la descripción de la [Tarea 3](./T3-2022-2-juanjouriarte/README.md)
+
 
