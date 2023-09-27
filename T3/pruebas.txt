@@ -1,0 +1,71 @@
+for (int i = 0; i < edges_count; i++) {
+		for (int j = i + 1; j < edges_count; j++) {
+			if (edges[i]->weight > edges[j]->weight) {
+				printf("Swapping edges\n");
+				Edge* temp = edges[i];
+				edges[i] = edges[j];
+				edges[j] = temp;
+			}
+		}
+	}
+
+
+// Add edges to mst
+	for (int i = 0; i < edges_count; i++) {
+		if (mst_count == nodes_count - 1) {
+			break;
+		}
+		if (edges[i]->node1->visited_mst == 0 || edges[i]->node2->visited_mst == 0) {
+			printf("Edge Creado: (%d, %d) - (%d, %d), weight: %d\n", edges[i]->node1->x, edges[i]->node1->y, edges[i]->node2->x, edges[i]->node2->y, edges[i]->weight);
+			mst[mst_count] = edges[i];
+			mst_count++;
+			edges[i]->node1->visited_mst = 1;
+			edges[i]->node2->visited_mst = 1;
+			if (edges[i]->node1->next == NULL && edges[i]->node2->next == NULL) {
+				edges[i]->node1->next = edges[i]->node2;
+			}
+			else if (edges[i]->node1->next == NULL && edges[i]->node2->next != NULL) {
+				edges[i]->node1->next = edges[i]->node2;
+			}
+			else if (edges[i]->node1->next != NULL && edges[i]->node2->next == NULL) {
+				edges[i]->node2->next = edges[i]->node1;
+			}
+		}
+		else if (edges[i]->node1->visited_mst == 1 && edges[i]->node2->visited_mst == 1 && mst_count == nodes_count - 2) {
+			// Check if the edge is creating a cycle
+			Node* root = edges[0]->node1;
+			mst[mst_count] = edges[i];
+			mst_count++;
+			edges[i]->node1->visited_mst = 1;
+			edges[i]->node2->visited_mst = 1;
+			if (edges[i]->node1->next == NULL && edges[i]->node2->next == NULL) {
+				edges[i]->node1->next = edges[i]->node2;
+			}
+			else if (edges[i]->node1->next == NULL && edges[i]->node2->next != NULL) {
+				edges[i]->node1->next = edges[i]->node2;
+			}
+			else if (edges[i]->node1->next != NULL && edges[i]->node2->next == NULL) {
+				edges[i]->node2->next = edges[i]->node1;
+			}
+			printf("Checking if edge is creating a cycle\n");
+			int cycle = recursive_dfs_improved(root);
+			if (cycle) {
+				mst[mst_count - 1] = NULL;
+				mst_count--;
+				edges[i]->node1->visited_mst = 0;
+				edges[i]->node2->visited_mst = 0;
+				if (edges[i]->node1->next == edges[i]->node2) {
+					edges[i]->node1->next = NULL;
+				}
+				else if (edges[i]->node2->next == edges[i]->node1) {
+					edges[i]->node2->next = NULL;
+				}
+			}
+			else if (!cycle) {
+				printf("Cycle not found\n");
+				for (int i = 0; i < nodes_count; i++) {
+					nodes[i]->visited = 0;
+				}
+			}
+		}
+	}
